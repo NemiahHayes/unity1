@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
+    [SerializeField] GameObject placedItem;
     public float dropDistance;
 
     //Private Variables
-    bool drag;
-    Vector3 offset;
-    Vector3 spawn;
+    bool active;
+    bool placed;
     GameObject master;
+    SpriteRenderer spriteRenderer;
 
     //Grid Management
     GameObject[] grids;
@@ -20,63 +21,64 @@ public class Draggable : MonoBehaviour
     {
         master = GameObject.FindGameObjectWithTag("Master");
         grids = master.GetComponent<GridManager>().GetGrids();
-        spawn = this.transform.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        active = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (drag)
-        {
-            this.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
-        }
-    }
-
-    private void OnMouseDown()
-    {
-        offset = this.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        drag = true;
-    }
-
-    private void OnMouseUp()
-    {
-        drag = false;
-
-        GameObject nearestObject = findNearestObject();
-        if (nearestObject != null && Vector2.Distance(this.transform.position, nearestObject.transform.position) < dropDistance)
-        {
-            this.transform.position = nearestObject.transform.position;
-        } else
-        {
-            transform.position = spawn;
-        }
         
+        if (active)
+        {
+            this.transform.position = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            PlayerInput();
+        }
+
     }
 
-    private GameObject findNearestObject()
+    private void PlayerInput()
     {
-        GameObject nearestObject;
+        if (Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("Left Click");
+            active = false;
+
+            GameObject nearestObject = FindNearestObject();
+            if (nearestObject != null && Vector2.Distance(this.transform.position, nearestObject.transform.position) < dropDistance)
+            {
+                Instantiate(placedItem, nearestObject.transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    private GameObject FindNearestObject()
+    {
+        GameObject nearestObject = null;
+        float nearestDistance = dropDistance + 1;
+
         if (grids != null)
         {
-            nearestObject = grids[0];
-            float nearestDistance = Vector3.Distance(this.transform.position, grids[0].transform.position);
-
-            if (grids.Length > 0)
-            {
-                for (int i = 1; i < grids.Length; i++)
+                for (int i = 0; i < grids.Length; i++)
                 {
-                    float distance = Vector3.Distance(this.transform.position, grids[i].transform.position);
+                    float distance = Vector2.Distance(this.transform.position, grids[i].transform.position);
 
                     if (distance < nearestDistance)
                     {
+                        nearestDistance = distance;
                         nearestObject = grids[i];
                     }
                 }
-            }
-
-            return nearestObject;
         }
 
-        return null;
+        Debug.Log("Nearest Distance: " + nearestDistance + "Nearest Object" + nearestObject);
+        return nearestObject;
     }
+
 }
