@@ -7,10 +7,13 @@ public class ShooterMain : MonoBehaviour, IPlaceable
 
     [SerializeField] GameObject dart;
     public float shootSpeed;
+    Vector2 bulletSpawn;
 
     // Start is called before the first frame update
     void Start()
     {
+        float posY = this.transform.position.y;
+        bulletSpawn = new Vector2(this.transform.position.x, posY + 0.2f);
         StartCoroutine(ShootTime(shootSpeed));
     }
 
@@ -22,7 +25,16 @@ public class ShooterMain : MonoBehaviour, IPlaceable
 
     public void Action()
     {
-        Instantiate(dart, this.transform.position, Quaternion.identity);
+        int layerMask = LayerMask.GetMask("Enemy");
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, Mathf.Infinity, layerMask);
+
+        if (hit)
+        {
+            Instantiate(dart, bulletSpawn, Quaternion.identity);
+            Debug.Log($"{hit.collider.name}");
+        }
+        
     }
 
     private IEnumerator ShootTime(float shootTime)

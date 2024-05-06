@@ -46,9 +46,10 @@ public class Draggable : MonoBehaviour
             active = false;
 
             GameObject nearestObject = FindNearestObject();
-            if (nearestObject != null && Vector2.Distance(this.transform.position, nearestObject.transform.position) < dropDistance)
+            if (nearestObject != null && Vector2.Distance(this.transform.position, nearestObject.transform.position) < dropDistance && nearestObject.GetComponent<GridSlotDragging>().GetFree())
             {
                 Instantiate(placedItem, nearestObject.transform.position, Quaternion.identity);
+                nearestObject.GetComponent<GridSlotDragging>().SetFree(false);
                 Destroy(this.gameObject);
             }
             else

@@ -7,6 +7,7 @@ public class GridSlotDragging : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     bool active;
+    bool free;
     Transform playerItem;
     float dragDistance;
     
@@ -26,6 +27,8 @@ public class GridSlotDragging : MonoBehaviour
         itemPreview = itemPreviewObject.GetComponent<ItemPreview>();
         itemPreviewRender = itemPreviewObject.GetComponent<SpriteRenderer>();
         itemPreviewRender.enabled = false;
+
+        free = true;
     }
 
     private void Update()
@@ -69,4 +72,13 @@ public class GridSlotDragging : MonoBehaviour
         }
     }
 
+    public void SetFree(bool free)
+    {
+        this.free = free;
+    }
+
+    public bool GetFree()
+    {
+        return free;
+    }
 }

@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082ccf768c91a7e4fb89c05f01e896a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bananaButtonItem: {fileID: 3043063882828872106, guid: 0d5d6d25d94ce3b428f8939c9901d99a, type: 3}
   dartButtonItem: {fileID: 3043063882828872106, guid: 8f49d69fe4a8ba24c920e6f61f4c644e, type: 3}
 --- !u!1001 &745223190
 PrefabInstance:
@@ -316,9 +317,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1050093299142799249, guid: 6bde0077895d5ac4e97a2797604b5e60, type: 3}
+      propertyPath: hit.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1050093299142799249, guid: 6bde0077895d5ac4e97a2797604b5e60, type: 3}
+      propertyPath: hit.b
+      value: 0.2924528
+      objectReference: {fileID: 0}
+    - target: {fileID: -1050093299142799249, guid: 6bde0077895d5ac4e97a2797604b5e60, type: 3}
+      propertyPath: hit.g
+      value: 0.2924528
+      objectReference: {fileID: 0}
+    - target: {fileID: -1050093299142799249, guid: 6bde0077895d5ac4e97a2797604b5e60, type: 3}
+      propertyPath: hit.r
+      value: 0.2924528
+      objectReference: {fileID: 0}
+    - target: {fileID: -1050093299142799249, guid: 6bde0077895d5ac4e97a2797604b5e60, type: 3}
+      propertyPath: damageDisplayTime
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5221574753363407076, guid: 6bde0077895d5ac4e97a2797604b5e60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.65
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5221574753363407076, guid: 6bde0077895d5ac4e97a2797604b5e60, type: 3}
       propertyPath: m_LocalPosition.y
@@ -365,6 +386,25 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bde0077895d5ac4e97a2797604b5e60, type: 3}
+--- !u!1 &1497070077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5961757803902806254, guid: 0ddb3f24afca2594195b9b7435d014b7, type: 3}
+  m_PrefabInstance: {fileID: 4913257513493705092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1497070080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497070077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26ab5e0cc3f46b74ab572507a7706da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnTime: 15
+  banana: {fileID: 7158995572302203115, guid: 5f61be37414b7f74ab7b29b4d888179d, type: 3}
 --- !u!1001 &4913257513493705092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -464,7 +504,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5961757803902806254, guid: 0ddb3f24afca2594195b9b7435d014b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1497070080}
   m_SourcePrefab: {fileID: 100100000, guid: 0ddb3f24afca2594195b9b7435d014b7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

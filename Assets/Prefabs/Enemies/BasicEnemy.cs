@@ -7,10 +7,19 @@ public class BasicEnemy : MonoBehaviour
 
     public float moveSpeed;
     public float health;
+    public float damageDisplayTime;
     private float currentHealth;
+
+    SpriteRenderer spriteRenderer;
+    [SerializeField]
+    Color hit;
+    Color regular;
+
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        regular = spriteRenderer.color;
         currentHealth = health;
     }
 
@@ -24,6 +33,7 @@ public class BasicEnemy : MonoBehaviour
     public void DamageEnemy(float damage)
     {
         currentHealth-=damage;
+        StartCoroutine(DamageDisplay(damageDisplayTime));
 
         if (currentHealth <= 0)
         {
@@ -31,5 +41,12 @@ public class BasicEnemy : MonoBehaviour
         }
 
         Debug.Log($"{gameObject.name} health: {currentHealth}");
+    }
+
+    private IEnumerator DamageDisplay(float damageTime)
+    {
+        spriteRenderer.color = hit;
+        yield return new WaitForSeconds(damageTime);
+        spriteRenderer.color = regular;
     }
 }

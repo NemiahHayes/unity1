@@ -8,32 +8,39 @@ public class UIEvents : MonoBehaviour
 
     private UIDocument uiDocument;
     private Button dartButton;
+    private Button bananaButton;
+    [SerializeField] GameObject bananaButtonItem;
     [SerializeField] GameObject dartButtonItem;
-    Sprite dartSprite;
-    Image dartImage;
+    
 
     // Start is called before the first frame update
     void Awake()
     {
         uiDocument = GetComponent<UIDocument>();
 
+        //Set Up Banana Button
+        bananaButton = uiDocument.rootVisualElement.Q("bananacard") as Button;
+        bananaButton.RegisterCallback<ClickEvent>(OnBananaClick);
+
         //Set Up Dart Button
         dartButton = uiDocument.rootVisualElement.Q("dartcard") as Button;
-        dartButton.RegisterCallback<ClickEvent>(OnCard1Click);
-        dartSprite = dartButtonItem.GetComponent<SpriteRenderer>().sprite;
-        dartImage = new Image();
-        dartImage.transform.position = dartButton.transform.position;
-        dartImage.sprite = dartSprite;
+        dartButton.RegisterCallback<ClickEvent>(OnDartClick);
     }
 
-    private void OnCard1Click(ClickEvent evt)
+    private void OnDartClick(ClickEvent evt)
     {
         Instantiate(dartButtonItem);
     }
 
+    private void OnBananaClick(ClickEvent evt)
+    {
+        Instantiate(bananaButtonItem);
+    }
+
     private void OnDisable()
     {
-        dartButton.UnregisterCallback<ClickEvent>(OnCard1Click);
+        dartButton.UnregisterCallback<ClickEvent>(OnDartClick);
+        bananaButton.UnregisterCallback<ClickEvent>(OnBananaClick);
     }
 
     // Update is called once per frame
