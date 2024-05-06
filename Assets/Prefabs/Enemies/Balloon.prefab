@@ -102,7 +102,7 @@ MonoBehaviour:
   moveSpeed: -0.001
   health: 100
   damageDisplayTime: 0.1
-  hit: {r: 1, g: 0.2783019, b: 0.2783019, a: 0}
+  hit: {r: 0.86694556, g: 0.95688456, b: 0.9622642, a: 1}
 --- !u!50 &-1833886440548962435
 Rigidbody2D:
   serializedVersion: 4
