@@ -19,6 +19,7 @@ public class UIEvents : MonoBehaviour
 
     GameObject master;
     CurrencyManager currencyManager;
+    CardManager cardManager;
 
     private Vector2 spawnInit;
     
@@ -29,6 +30,7 @@ public class UIEvents : MonoBehaviour
         //Set Game Objects
         master = GameObject.FindGameObjectWithTag("Master");
         currencyManager = master.GetComponent<CurrencyManager>();
+        cardManager = master.GetComponent<CardManager>();
         spawnInit = new Vector2(-50, -50);
 
         //Set UI Elements
@@ -59,8 +61,7 @@ public class UIEvents : MonoBehaviour
     {
         if (currencyManager.GetCurrency() >= currencyManager.dartCost)
         {
-            currencyManager.PurchaseCard(currencyManager.dartCost);
-            Instantiate(dartButtonItem, spawnInit, Quaternion.identity);
+            SpawnCard(dartButtonItem, currencyManager.dartCost);
         }
     }
 
@@ -68,8 +69,17 @@ public class UIEvents : MonoBehaviour
     {
         if (currencyManager.GetCurrency() >= currencyManager.bananaCost)
         {
-            currencyManager.PurchaseCard(currencyManager.bananaCost);
-            Instantiate(bananaButtonItem, spawnInit, Quaternion.identity);
+            SpawnCard(bananaButtonItem, currencyManager.bananaCost);
+        }
+    }
+
+    private void SpawnCard(GameObject card, int cost)
+    {
+        if (!cardManager.cardActive)
+        {
+            currencyManager.PurchaseCard(cost);
+            cardManager.cardActive = true;
+            Instantiate(card, spawnInit, Quaternion.identity);
         }
     }
 

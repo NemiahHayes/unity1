@@ -31,7 +31,7 @@ public class ShooterMain : MonoBehaviour, IPlaceable
 
         if (hit)
         {
-            Instantiate(dart, bulletSpawn, Quaternion.identity);
+            Instantiate(dart, bulletSpawn, Quaternion.identity, this.transform);
             Debug.Log($"{hit.collider.name}");
         }
         

@@ -15,9 +15,8 @@ public class Draggable : MonoBehaviour
 
     //Private Variables
     bool active;
-    bool placed;
     GameObject master;
-    CurrencyManager currencyManager;
+    CardManager cardManager;
 
     //Grid Management
     GameObject[] grids;
@@ -26,6 +25,7 @@ public class Draggable : MonoBehaviour
     void Start()
     {
         master = GameObject.FindGameObjectWithTag("Master");
+        cardManager = master.GetComponent<CardManager>();
         grids = master.GetComponent<GridManager>().GetGrids();
 
         active = true;
@@ -55,6 +55,7 @@ public class Draggable : MonoBehaviour
             {
                 Instantiate(placedItem, nearestObject.transform.position, Quaternion.identity);
                 nearestObject.GetComponent<GridSlotDragging>().SetFree(false);
+                cardManager.cardActive = false;
                 Destroy(this.gameObject);
             }
             else
