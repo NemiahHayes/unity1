@@ -144,4 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placedItem: {fileID: 1503546637923698778, guid: 29b61f2072b34644885faaf760648a3a, type: 3}
+  itemPrice: 50
   dropDistance: 0.5

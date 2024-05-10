@@ -7,26 +7,44 @@ public class BananaManager : MonoBehaviour
     Vector2 spawnPosition;
 
     [SerializeField]
-    float spawnTime;
+    float lowTimer, highTimer;
+    float randTimer;
+    [SerializeField]
+    float initialSpawnTime;
 
     [SerializeField]
     GameObject banana;
+    int bananaCount;
+    bool stopSpawn;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnPosition = this.transform.position;
         spawnPosition.y += 20;
-        StartCoroutine(SpawnBanana(spawnTime));
+        stopSpawn = false;
+        StartCoroutine(SpawnBanana());
     }
 
-    IEnumerator SpawnBanana(float spawnTimer)
+    private void Update()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(spawnTimer);
-            //Spawn New Banana
-            Instantiate(banana, spawnPosition, Quaternion.identity);
+        randTimer = Random.Range(lowTimer, highTimer);
+    }
+
+    IEnumerator SpawnBanana()
+    {
+        yield return new WaitForSeconds(initialSpawnTime);
+
+        while (!stopSpawn)
+        {   
+            if (bananaCount <= 8)
+            {
+                //Spawn New Banana
+                Instantiate(banana, spawnPosition, Quaternion.identity, this.transform);
+                bananaCount++;
+            }
+
+            yield return new WaitForSeconds(randTimer);
         }
     }
 }

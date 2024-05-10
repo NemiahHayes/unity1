@@ -26,7 +26,7 @@ public class BasicEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float posx = this.transform.position.x + moveSpeed;
+        float posx = this.transform.position.x + moveSpeed * Time.deltaTime;
         this.transform.position = new Vector2(posx, this.transform.position.y);
     }
 

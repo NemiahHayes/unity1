@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8446287930183705260}
   - component: {fileID: 8363312452674715497}
+  - component: {fileID: 6409290506843918912}
+  - component: {fileID: 6590931876815674514}
   m_Layer: 0
   m_Name: Master
   m_TagString: Master
@@ -46,6 +48,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 6934942797180505540, guid: 48a1f16ec85ed6441a949908d19abb3b, type: 3}
   width: 12
-  height: 3
-  widthSpacing: 1.5
-  heightSpacing: 1.5
+  height: 5
+  widthSpacing: 1
+  heightSpacing: 1
+  startPosition: {x: 0, y: 0}
+  gridA: {r: 0.23300104, g: 0.6415094, b: 0.33368862, a: 1}
+  gridB: {r: 0.19842473, g: 0.46226418, b: 0.30554447, a: 1}
+--- !u!114 &6409290506843918912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5961757803902806254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26ab5e0cc3f46b74ab572507a7706da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnTime: 15
+  banana: {fileID: 7158995572302203115, guid: 5f61be37414b7f74ab7b29b4d888179d, type: 3}
+--- !u!114 &6590931876815674514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5961757803902806254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8181dc3a041123428cba017002cb939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 25
+  startCurrency: 50
+  dartCost: 100
+  bananaCost: 50

@@ -5,20 +5,37 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemy;
-    public float spawnTime;
+    [SerializeField]
+    float lowSpawn, highSpawn, initialSpawn;
+    float randSpawn;
+
+    public int maxEnemy;
+    int enemyCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnTime(spawnTime));
+        StartCoroutine(SpawnTime());
     }
 
-    IEnumerator SpawnTime(float spawnTime)
+    private void Update()
     {
+        randSpawn = Random.Range(lowSpawn, highSpawn);
+    }
+
+    IEnumerator SpawnTime()
+    {
+        yield return new WaitForSeconds(initialSpawn);
+
         while (true)
-        {
-            yield return new WaitForSeconds(spawnTime);
-            Instantiate(enemy, this.transform.position, Quaternion.identity);
+        {  
+            if (enemyCount < maxEnemy)
+            {
+                Instantiate(enemy, this.transform.position, Quaternion.identity, this.transform);
+                enemyCount++;
+            }
+
+            yield return new WaitForSeconds(randSpawn);
         }
     }
 }

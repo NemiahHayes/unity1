@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
-    [SerializeField] GameObject placedItem;
+    [SerializeField] 
+    GameObject placedItem;
+
+    [SerializeField] 
+    public float itemPrice;
+
+    [SerializeField] 
     public float dropDistance;
 
     //Private Variables
     bool active;
     bool placed;
     GameObject master;
-    SpriteRenderer spriteRenderer;
+    CurrencyManager currencyManager;
 
     //Grid Management
     GameObject[] grids;
@@ -21,7 +27,6 @@ public class Draggable : MonoBehaviour
     {
         master = GameObject.FindGameObjectWithTag("Master");
         grids = master.GetComponent<GridManager>().GetGrids();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         active = true;
     }
@@ -54,7 +59,7 @@ public class Draggable : MonoBehaviour
             }
             else
             {
-                Destroy(this.gameObject);
+                active = true;
             }
         }
     }

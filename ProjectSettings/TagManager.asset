@@ -11,6 +11,7 @@ TagManager:
   - Dart
   - PlayerDamage
   - Enemy
+  - Interface
   layers:
   - Default
   - TransparentFX

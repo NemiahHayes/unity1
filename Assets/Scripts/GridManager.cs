@@ -35,7 +35,7 @@ public class GridManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                var spawnGrid = Instantiate(grid, new Vector2(x + widthSpacing + startPosition.x, y + heightSpacing + startPosition.y), Quaternion.identity);
+                var spawnGrid = Instantiate(grid, new Vector2(x + widthSpacing + startPosition.x, y + heightSpacing + startPosition.y), Quaternion.identity, this.transform);
 
                 //Set Color
                 if (colorBool)

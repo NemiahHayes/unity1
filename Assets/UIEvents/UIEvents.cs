@@ -9,32 +9,68 @@ public class UIEvents : MonoBehaviour
     private UIDocument uiDocument;
     private Button dartButton;
     private Button bananaButton;
+    private Label currency;
     [SerializeField] GameObject bananaButtonItem;
     [SerializeField] GameObject dartButtonItem;
+
+    //Currency Labels
+    private Label bananaCurrency;
+    private Label dartCurrency;
+
+    GameObject master;
+    CurrencyManager currencyManager;
+
+    private Vector2 spawnInit;
     
 
     // Start is called before the first frame update
     void Awake()
     {
+        //Set Game Objects
+        master = GameObject.FindGameObjectWithTag("Master");
+        currencyManager = master.GetComponent<CurrencyManager>();
+        spawnInit = new Vector2(-50, -50);
+
+        //Set UI Elements
         uiDocument = GetComponent<UIDocument>();
+
+        //Set Up Currency Counter
+        currency = uiDocument.rootVisualElement.Q("currencylabel") as Label;
 
         //Set Up Banana Button
         bananaButton = uiDocument.rootVisualElement.Q("bananacard") as Button;
         bananaButton.RegisterCallback<ClickEvent>(OnBananaClick);
+        bananaCurrency = uiDocument.rootVisualElement.Q("bananacurrency") as Label;
+        bananaCurrency.text = currencyManager.bananaCost.ToString();
 
         //Set Up Dart Button
         dartButton = uiDocument.rootVisualElement.Q("dartcard") as Button;
         dartButton.RegisterCallback<ClickEvent>(OnDartClick);
+        dartCurrency = uiDocument.rootVisualElement.Q("dartcurrency") as Label;
+        dartCurrency.text = currencyManager.dartCost.ToString();
+    }
+
+    public void UpdateCurrency(int score)
+    {
+        currency.text = score.ToString();
     }
 
     private void OnDartClick(ClickEvent evt)
     {
-        Instantiate(dartButtonItem);
+        if (currencyManager.GetCurrency() >= currencyManager.dartCost)
+        {
+            currencyManager.PurchaseCard(currencyManager.dartCost);
+            Instantiate(dartButtonItem, spawnInit, Quaternion.identity);
+        }
     }
 
     private void OnBananaClick(ClickEvent evt)
     {
-        Instantiate(bananaButtonItem);
+        if (currencyManager.GetCurrency() >= currencyManager.bananaCost)
+        {
+            currencyManager.PurchaseCard(currencyManager.bananaCost);
+            Instantiate(bananaButtonItem, spawnInit, Quaternion.identity);
+        }
     }
 
     private void OnDisable()

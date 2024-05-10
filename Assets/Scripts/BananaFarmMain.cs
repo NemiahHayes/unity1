@@ -8,14 +8,21 @@ public class BananaFarmMain : MonoBehaviour
 
     public GameObject banana;
     public float spawnTimer;
+    bool bananaSpawned;
 
     // Start is called before the first frame update
     void Start()
     {
         float posY = transform.position.y;
         spawn = new Vector2(transform.position.x, posY - 0.3f);
+        bananaSpawned = false;
 
         StartCoroutine(SpawnBanana(spawnTimer));
+    }
+
+    public void BananaClicked()
+    {
+        bananaSpawned = false;
     }
 
     IEnumerator SpawnBanana(float spawnTimer)
@@ -23,7 +30,12 @@ public class BananaFarmMain : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnTimer);
-            Instantiate(banana, spawn, Quaternion.identity);
+            
+            if (!bananaSpawned)
+            {
+                Instantiate(banana, spawn, Quaternion.identity, this.transform);
+                bananaSpawned = true;
+            }
         }
     }
 }
